@@ -3,8 +3,6 @@ import githubReducer from './GithubReducer';
 
 const GithubContext = createContext({});
 
-const API_URL = 'https://api.github.com';
-const TOKEN = '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';
 
 export const GithubProvider = ({ children }) => {
     const intitialState = {
@@ -24,10 +22,10 @@ export const GithubProvider = ({ children }) => {
             q: text
         })
         try {
-            const response = await fetch(`${API_URL}/search/users?${params}`,
+            const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`,
                 {
                     headers: {
-                        Authorization: `token ${TOKEN}`
+                        Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
                     }
                 },);
             const {items} = await response.json();
@@ -44,8 +42,8 @@ export const GithubProvider = ({ children }) => {
         setLoading()
 
         try {
-            const response = await fetch(`${API_URL}/users/${login}`,
-                {headers: {Authorization: `token ${TOKEN}`}},);
+            const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}`,
+                {headers: {Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`}},);
             
             if (response.status === 404) {
                 // window.location = '/notfound';
@@ -66,8 +64,8 @@ export const GithubProvider = ({ children }) => {
         setLoading()
 
         try {
-            const response = await fetch(`${API_URL}/users/${login}/repos`,
-                {headers: {Authorization: `token ${TOKEN}`}},);
+            const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos`,
+                {headers: {Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`}},);
             
             if (response.status === 404) {
                 // window.location = '/notfound';
