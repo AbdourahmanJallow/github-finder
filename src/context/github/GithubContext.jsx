@@ -28,7 +28,7 @@ export const GithubProvider = ({ children }) => {
                         Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
                     }
                 },);
-            const {items} = await response.json();
+            const { items } = await response.json();
             dispatch({
                 type: 'GET_USERS',
                 payload: items
